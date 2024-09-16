@@ -13,3 +13,4 @@ BreakConstructorInitializers: BeforeComma
 AlwaysBreakTemplateDeclarations: Yes
 IndentAccessModifiers: false
 AccessModifierOffset: -4
+AllowShortEnumsOnASingleLine: false
