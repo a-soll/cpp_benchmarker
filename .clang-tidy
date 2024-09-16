@@ -1,0 +1,4 @@
+Checks: '
+-cppcoreguidelines-pro-bounds-array-to-pointer-decay
+-cppcoreguidelines-owning-memory
+'

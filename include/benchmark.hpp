@@ -50,7 +50,7 @@ public:
         this->_results.clear();
         this->_max_len = 0;
         this->_output.clear();
-        for (const auto i : tests) {
+        for (const auto &i : tests) {
             this->_max_len = std::max<int64_t>(i.first.length(), this->_max_len);
         }
         this->_tests = &tests;
