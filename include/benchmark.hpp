@@ -46,21 +46,17 @@ public:
             this->_unit = "ns";
         }
     }
-    void add_tests(test_vector<T> &tests) {
-        this->_results.clear();
-        this->_max_len = 0;
+    void add_test(test_pair<T> test) {
         this->_output.clear();
-        for (const auto &i : tests) {
-            this->_max_len = std::max<int64_t>(i.first.length(), this->_max_len);
-        }
-        this->_tests = &tests;
+        this->_max_len = std::max<int64_t>(test.first.length(), this->_max_len);
+        this->_tests.push_back(std::move(test));
     }
 
     void run_tests() {
         this->_times.clear();
         std::cout << T::name << '\n';
         std::cout << "-----------------------------\n";
-        for (auto &p : *this->_tests) {
+        for (auto &p : this->_tests) {
             this->_output += p.first;
             for (int i = p.first.length(); i < this->_max_len + 2;
                  i++) { // this can't be the best way
@@ -74,12 +70,15 @@ public:
             this->_output.clear();
             this->_times.clear();
         }
+        this->_max_len = 0;
+        this->_tests.clear();
+        std::cout << '\n';
     }
 
 private:
     std::vector<int64_t> _results;
     times _times;
-    test_vector<T> *_tests = nullptr;
+    test_vector<T> _tests;
     std::string _output;
     int64_t _max_len = 0; // used for formatting output
     std::string _unit;

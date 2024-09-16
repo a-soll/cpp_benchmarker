@@ -41,7 +41,7 @@ enum benchmark_unit {
 ---
 
 ## BYOF (bring your own functions)
-Right now, the tool only runs functions that are totally provided by you. Your functions must conform to a `test`, which just means you're providing a function that returns its operation time as an `int64_t`.
+Right now, the tool only runs functions that are totally provided by you. Your functions must conform to a `test`, which just means you're just providing a function that returns its operation time as an `int64_t`.
 
 The  reason you must measure the time of the operation in your own function is to eliminate any added latency from the function call itself. Function calls, unless truly inlined, can add latency and reduce the accuracy of the results.
 
@@ -54,12 +54,10 @@ First, set up the `Benchmark` object. The `Benchmark` object takes the unit of t
 template <typename T>
 void run_tests() {
     Benchmark<T> bench(MICROSECONDS, 999999); // Set up the benchmark object (unit comes from `benchmark_unit`)
-    test_vector<T> tests; // Keep the tests in scope
 
-    tests.push_back({"vector push back", test_vector_push_back<T>}); // add your tests
-    tests.push_back({"vector push back (move)", test_vector_push_back_move<T>});
-
-    bench.add_tests(tests); // assign the tests to the benchmarker
+    // add your tests
+    bench.add_test({"vector push back", test_vector_push_back<T>});
+    bench.add_test({"vector push back (move)", test_vector_push_back_move<T>});
 
     bench.run_tests(); // run them
 }

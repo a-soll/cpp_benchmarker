@@ -5,7 +5,7 @@
 
 // Object that contains just a string.
 class SingleSSOString {
-  public:
+public:
     SingleSSOString()
         : _contents("contents") {}
     SingleSSOString(std::string_view contents)
@@ -13,12 +13,12 @@ class SingleSSOString {
 
     inline static const std::string name = "SingleSSOString";
 
-  private:
+private:
     std::string _contents;
 };
 
 class FiveSSOStrings {
-  public:
+public:
     FiveSSOStrings(std::string_view contents)
         : _s1(contents)
         , _s2(contents)
@@ -34,7 +34,7 @@ class FiveSSOStrings {
 
     inline static const std::string name = "FiveSSOStrings";
 
-  private:
+private:
     std::string _s1;
     std::string _s2;
     std::string _s3;
