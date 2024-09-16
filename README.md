@@ -5,12 +5,14 @@ This is a single header cpp benchmarkign tool. Simply include benchmark.hpp in y
 ## Explanation
 The benchmarks are broken up into a few components:
 ```cpp
+// vector of each test iteration result
+using times = std::vector<uint64_t>;
+
+// alias for test function callback
 template <typename T>
 using test = std::function<int64_t()>;
 
-template <typename T>
-using test = std::function<void(times &)>;
-
+// ties string to function
 template <typename T>
 using test_pair = std::pair<std::string, test<T>>;
 
