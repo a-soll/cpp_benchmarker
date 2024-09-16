@@ -1,0 +1,15 @@
+SingleSSOString
+-----------------------------
+vector push back               81ns
+vector push back (move)        103ns
+vector emplace back (no args)  102ns
+vector emplace back (args)     105ns
+array append                   18ns
+
+FiveSSOStrings
+-----------------------------
+vector push back               185ns
+vector push back (move)        260ns
+vector emplace back (no args)  224ns
+vector emplace back (args)     225ns
+array append                   22ns
