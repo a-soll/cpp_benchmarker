@@ -46,6 +46,7 @@ public:
             this->_unit = "ns";
         }
     }
+
     void add_test(test_pair<T> test) {
         this->_output.clear();
         this->_max_len = std::max<int64_t>(test.first.length(), this->_max_len);
