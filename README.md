@@ -43,14 +43,14 @@ enum benchmark_unit {
 ## BYOF (bring your own functions)
 Right now, the tool only runs functions that are totally provided by you. Your functions must conform to a `test`, which just means you're providing a function that returns its operation time as an `int64_t`.
 
+The  reason you must measure the time of the operation in your own function is to eliminate any added latency from the function call itself. Function calls, unless truly inlined, can add latency and reduce the accuracy of the results.
+
+## Example usage
 Below is an example of how to set up a benchmark. This example will measure the time it takes for an `std::vector` to `push_back()` a provided object.
 
 First, set up the `Benchmark` object. The `Benchmark` object takes the unit of time you intend to measure in (used for the output) as well as the number of times each test should be ran. The template parameter is used for whatever object you indend to test (with or against). In this example, the object is used as the data that the vector test functions will be operating on.
 
 ```cpp
-// assume SingleSSOString is an object that just has a small string member.
-run_tests<SingleSSOString>();
-
 template <typename T>
 void run_tests() {
     Benchmark<T> bench(MICROSECONDS, 999999); // Set up the benchmark object (unit comes from `benchmark_unit`)
@@ -62,8 +62,13 @@ void run_tests() {
     bench.add_tests(tests); // assign the tests to the benchmarker
 
     bench.run_tests(); // run them
+}
 
-    // output from `run_tests()`:
+int main() {
+    // assume SingleSSOString is an object that just has a small string member.
+    run_tests<SingleSSOString>();
+
+    // output:
     //     SingleSSOString
     // -----------------------------
     // vector push back         174ns
