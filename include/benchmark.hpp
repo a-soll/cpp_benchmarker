@@ -10,7 +10,7 @@
 using times = std::vector<uint64_t>;
 
 template <typename T>
-using test = std::function<void(times &)>;
+using test = std::function<int64_t()>;
 
 template <typename T>
 using test_pair = std::pair<std::string, test<T>>;
@@ -18,7 +18,12 @@ using test_pair = std::pair<std::string, test<T>>;
 template <typename T>
 using test_vector = std::vector<test_pair<T>>;
 
-enum benchmark_unit { SECONDS, MILLISECONDS, MICROSECONDS, NANOSECONDS };
+enum benchmark_unit {
+    SECONDS,
+    MILLISECONDS,
+    MICROSECONDS,
+    NANOSECONDS
+};
 
 template <typename T>
 class Benchmark {
@@ -57,7 +62,9 @@ public:
                  i++) { // this can't be the best way
                 this->_output += ' ';
             }
-            p.second(this->_times);
+            for (int i = 0; i < this->_num_tests; i++) {
+                this->_times.push_back(p.second());
+            }
             this->_output += std::to_string(this->_get_avg());
             std::cout << this->_output << this->_unit << "\n";
             this->_output.clear();

@@ -3,24 +3,16 @@
 #include <iostream>
 
 template <typename T>
-void test_array_append(times &t) {
+int64_t test_array_append() {
     size_t ind             = 0;
     const size_t ARRAY_MAX = 50;
     std::array<T, ARRAY_MAX> objects;
-
-    for (int i = 0; i < num_tests; i++) {
-        T o;
-        auto start    = high_resolution_clock::now();
-        objects[ind]  = o;
-        auto end      = high_resolution_clock::now();
-        auto duration = duration_cast<nanoseconds>(end - start);
-        t.push_back(duration.count());
-        if (ind == ARRAY_MAX - 1) {
-            ind = 0;
-        } else {
-            ind++;
-        }
-    }
+    T o;
+    auto start    = high_resolution_clock::now();
+    objects[ind]  = o;
+    auto end      = high_resolution_clock::now();
+    auto duration = duration_cast<nanoseconds>(end - start);
+    return duration.count();
 }
 
 template <typename T>

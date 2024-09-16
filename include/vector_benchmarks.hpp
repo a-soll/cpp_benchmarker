@@ -3,53 +3,45 @@
 #include <iostream>
 
 template <typename T>
-void test_vector_push_back(times &t) {
+int64_t test_vector_push_back() {
     std::vector<T> objects;
-    for (int i = 0; i < num_tests; i++) {
-        T o;
-        auto start = high_resolution_clock::now();
-        objects.push_back(o);
-        auto end      = high_resolution_clock::now();
-        auto duration = duration_cast<nanoseconds>(end - start);
-        t.push_back(duration.count());
-    }
+    T o;
+    auto start = high_resolution_clock::now();
+    objects.push_back(o);
+    auto end      = high_resolution_clock::now();
+    auto duration = duration_cast<nanoseconds>(end - start);
+    return duration.count();
 }
 
 template <typename T>
-void test_vector_emplace_back_no_args(times &t) {
+int64_t test_vector_emplace_back_no_args() {
     std::vector<T> objects;
-    for (int i = 0; i < num_tests; i++) {
-        auto start = high_resolution_clock::now();
-        objects.emplace_back();
-        auto end      = high_resolution_clock::now();
-        auto duration = duration_cast<nanoseconds>(end - start);
-        t.push_back(duration.count());
-    }
+    auto start = high_resolution_clock::now();
+    objects.emplace_back();
+    auto end      = high_resolution_clock::now();
+    auto duration = duration_cast<nanoseconds>(end - start);
+    return duration.count();
 }
 
 template <typename T>
-void test_vector_emplace_back_args(times &t) {
+int64_t test_vector_emplace_back_args() {
     std::vector<T> objects;
-    for (int i = 0; i < num_tests; i++) {
-        auto start = high_resolution_clock::now();
-        objects.emplace_back("contents");
-        auto end      = high_resolution_clock::now();
-        auto duration = duration_cast<nanoseconds>(end - start);
-        t.push_back(duration.count());
-    }
+    auto start = high_resolution_clock::now();
+    objects.emplace_back("contents");
+    auto end      = high_resolution_clock::now();
+    auto duration = duration_cast<nanoseconds>(end - start);
+    return duration.count();
 }
 
 template <typename T>
-void test_vector_push_back_move(times &t) {
+int64_t test_vector_push_back_move() {
     std::vector<T> objects;
-    for (int i = 0; i < num_tests; i++) {
-        auto start = high_resolution_clock::now();
-        T o;
-        objects.push_back(std::move(o));
-        auto end      = high_resolution_clock::now();
-        auto duration = duration_cast<nanoseconds>(end - start);
-        t.push_back(duration.count());
-    }
+    T o;
+    auto start = high_resolution_clock::now();
+    objects.push_back(std::move(o));
+    auto end      = high_resolution_clock::now();
+    auto duration = duration_cast<nanoseconds>(end - start);
+    return duration.count();
 }
 
 template <typename T>
