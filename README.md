@@ -1,5 +1,7 @@
 # Tool to help benchmark function runtime
 
+This is a single header cpp benchmarkign tool. Simply include benchmark.hpp in your project.
+
 ## Explanation
 The benchmarks are broken up into a few components:
 ```cpp
@@ -60,6 +62,12 @@ void run_tests() {
     bench.add_tests(tests); // assign the tests to the benchmarker
 
     bench.run_tests(); // run them
+
+    // output from `run_tests()`:
+    //     SingleSSOString
+    // -----------------------------
+    // vector push back         174ns
+    // vector push back (move)  181ns
 }
 ```
 
@@ -90,11 +98,4 @@ int64_t test_vector_push_back_move() {
     auto duration = duration_cast<nanoseconds>(end - start);
     return duration.count();
 }
-```
-Output of the above tests:
-```
-SingleSSOString
------------------------------
-vector push back         174ns
-vector push back (move)  181ns
 ```
