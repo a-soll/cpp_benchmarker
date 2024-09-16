@@ -78,14 +78,12 @@ Definitions of the above test functions:
 template <typename T>
 int64_t test_vector_push_back() {
     std::vector<T> objects;
-    for (int i = 0; i < num_tests; i++) {
-        T o;
-        auto start = high_resolution_clock::now();
-        objects.push_back(o);
-        auto end      = high_resolution_clock::now();
-        auto duration = duration_cast<nanoseconds>(end - start);
-        return duration.count();
-    }
+    T o;
+    auto start = high_resolution_clock::now();
+    objects.push_back(o);
+    auto end      = high_resolution_clock::now();
+    auto duration = duration_cast<nanoseconds>(end - start);
+    return duration.count();
 }
 
 template <typename T>
