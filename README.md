@@ -83,8 +83,8 @@ int64_t test_vector_push_back() {
 template <typename T>
 int64_t test_vector_push_back_move() {
     std::vector<T> objects;
-    auto start = high_resolution_clock::now();
     T o;
+    auto start = high_resolution_clock::now();
     objects.push_back(std::move(o));
     auto end      = high_resolution_clock::now();
     auto duration = duration_cast<nanoseconds>(end - start);
